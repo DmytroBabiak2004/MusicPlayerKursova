@@ -1,18 +1,14 @@
-﻿using System.Windows;
+﻿using Kursova.ViewModels;
+using System.Windows;
 
-namespace Kursova.View
+namespace Kursova
 {
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindow();
-        }
-
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }
