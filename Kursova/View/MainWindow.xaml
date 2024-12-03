@@ -1,0 +1,32 @@
+﻿<Window x:Class="Kursova.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Kursova"
+        Title="MainWindow" Height="600" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <!-- Головний контейнер - Grid -->
+    <Grid>
+
+        <!-- Меню навігації -->
+        <DockPanel>
+            <!-- Логотип та заголовок додатку -->
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Image Source="logo.png" Width="50" Height="50" Margin="10"/>
+                <TextBlock Text="Музичний Плеєр" FontSize="24" VerticalAlignment="Center" Margin="10"/>
+            </StackPanel>
+
+            <!-- Панель навігації -->
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Button Content="Головна" Command="{Binding NavigateCommand}" CommandParameter="Home" Width="100" Height="30" Margin="5"/>
+                <Button Content="Музика" Command="{Binding NavigateCommand}" CommandParameter="Music" Width="100" Height="30" Margin="5"/>
+                <Button Content="Профіль" Command="{Binding NavigateCommand}" CommandParameter="Profile" Width="100" Height="30" Margin="5"/>
+                <Button Content="Адмін" Command="{Binding NavigateCommand}" CommandParameter="Admin" Width="100" Height="30" Margin="5"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Основна частина вікна -->
+        <ContentControl Content="{Binding CurrentView}" Margin="10" />
+
+    </Grid>
+</Window>
