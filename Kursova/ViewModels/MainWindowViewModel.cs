@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel;
+using System.Windows.Controls; // Для UserControl
 using System.Windows.Input;
-
 
 namespace Kursova.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private object _currentView;
+        private UserControl _currentView;
 
-        public object CurrentView
+        public UserControl CurrentView
         {
             get => _currentView;
             set
@@ -23,7 +23,7 @@ namespace Kursova.ViewModels
         public MainWindowViewModel()
         {
             NavigateCommand = new RelayCommand<string>(Navigate);
-            CurrentView = new MainWindow(); // Початкове вікно
+            CurrentView = new HomeView();
         }
 
         private void Navigate(string viewName)
@@ -31,22 +31,26 @@ namespace Kursova.ViewModels
             switch (viewName)
             {
                 case "Home":
-                    CurrentView = new MainWindow();
+                    CurrentView = new HomeView();
                     break;
-                case "Music":
-                    CurrentView = new MusicPlayerView();
-                    break;
-                case "Profile":
-                    CurrentView = new UserProfileView();
-                    break;
-                case "Admin":
+                case "AdminTools":
                     CurrentView = new AdminToolsView();
                     break;
+                case "Login":
+                    CurrentView = new LoginView();
+                    break;
+                case "MusicPlayer":
+                    CurrentView = new MusicPlayerView();
+                    break;
+                case "UserProfile":
+                    CurrentView = new UserProfileView();
+                    break;
                 default:
-                    CurrentView = new MainWindow();
+                    CurrentView = new HomeView();
                     break;
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

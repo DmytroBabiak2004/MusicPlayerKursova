@@ -11,15 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kursova.ViewModels;
 
 namespace Kursova
 {
     /// <summary>
-    /// Interaction logic for MusicPlayerView.xaml
+    /// Interaction logic for UserProfileView.xaml
     /// </summary>
-    public partial class MusicPlayerView : Window
+    public partial class UserProfileView : UserControl
     {
-        public MusicPlayerView()
+        public UserProfileView()
         {
             InitializeComponent();
         }
