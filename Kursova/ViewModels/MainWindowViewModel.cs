@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using Kursova;
+
 
 namespace Kursova.ViewModels
 {
