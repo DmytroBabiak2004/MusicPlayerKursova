@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kursova.Models
+﻿namespace Kursova.Models
 {
-    internal class Playlist
+    public class Playlist
     {
+        public int PlaylistId { get; set; }  // Ідентифікатор плейлиста
+        public string Name { get; set; }  // Назва плейлиста
+        public int UserId { get; set; }  // Ідентифікатор користувача, який створив плейлист
+        public List<Track> Tracks { get; set; }  // Список пісень у плейлисті
     }
 }

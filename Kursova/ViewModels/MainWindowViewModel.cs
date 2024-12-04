@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Kursova.Views;
+using System.ComponentModel;
 using System.Windows.Controls; // Для UserControl
 using System.Windows.Input;
 
