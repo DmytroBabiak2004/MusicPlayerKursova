@@ -11,11 +11,9 @@ namespace Kursova.Views
         {
             InitializeComponent();
           
-    var dbContext = new ApplicationDbContext();
+            var dbContext = new ApplicationDbContext();
 
-            // Передаємо dbContext в конструктор LoginViewModel
             this.DataContext = new LoginViewModel(dbContext);
-
         }
 
         private void OnLoginButtonClick(object sender, RoutedEventArgs e)
@@ -23,10 +21,9 @@ namespace Kursova.Views
             var login = ((TextBox)FindName("LoginTextBox")).Text;
             var password = ((PasswordBox)FindName("PasswordBox")).Password;
 
-            // Перевірка наявності DataContext та правильності типу
             if (this.DataContext is LoginViewModel viewModel)
             {
-                // Перевірка аутентифікації
+                
                 if (viewModel.Login(login, password))
                 {
                     MessageBox.Show("Вхід успішний!");
