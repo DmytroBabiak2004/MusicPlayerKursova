@@ -1,12 +1,12 @@
-﻿using Kursova.Views;
-using System.ComponentModel;
-using System.Windows.Controls; // Для UserControl
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Kursova.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private readonly IViewFactory _viewFactory;
         private UserControl _currentView;
 
         public UserControl CurrentView
@@ -21,37 +21,24 @@ namespace Kursova.ViewModels
 
         public ICommand NavigateCommand { get; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel()  // Дефолтний конструктор
         {
+            _viewFactory = new ViewFactory(); // Ініціалізація вручну
             NavigateCommand = new RelayCommand<string>(Navigate);
-            CurrentView = new HomeView();
+            CurrentView = _viewFactory.CreateView("Home");
+        }
+
+        public MainWindowViewModel(IViewFactory viewFactory)  // Конструктор з параметром
+        {
+            _viewFactory = viewFactory;
+            NavigateCommand = new RelayCommand<string>(Navigate);
+            CurrentView = _viewFactory.CreateView("Home");
         }
 
         private void Navigate(string viewName)
         {
-            switch (viewName)
-            {
-                case "Home":
-                    CurrentView = new HomeView();
-                    break;
-                case "AdminTools":
-                    CurrentView = new AdminToolsView();
-                    break;
-                case "Login":
-                    CurrentView = new LoginView();
-                    break;
-                case "MusicPlayer":
-                    CurrentView = new MusicPlayerView();
-                    break;
-                case "UserProfile":
-                    CurrentView = new UserProfileView();
-                    break;
-                default:
-                    CurrentView = new HomeView();
-                    break;
-            }
+            CurrentView = _viewFactory.CreateView(viewName);
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
