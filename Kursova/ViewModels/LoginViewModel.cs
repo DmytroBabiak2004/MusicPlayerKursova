@@ -1,16 +1,27 @@
 ﻿using System;
+using System.Linq;
+using Kursova.Models;  // Тут має бути ваш контекст БД
 
 namespace Kursova.ViewModels
 {
     public class LoginViewModel
     {
-        // Простий приклад для перевірки логіну та пароля
+       private readonly ApplicationDbContext _dbContext;
+
+        public LoginViewModel(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public bool Login(string login, string password)
         {
-            // Перевірка за умовами
-            if (login == "admin" && password == "1234")
+           var user = _dbContext.Users.FirstOrDefault(u => u.Username == login);
+
+            if (user != null)
             {
-                return true;
+                if (user.Password == password)
+                {
+                    return true;
+                }
             }
             return false;
         }

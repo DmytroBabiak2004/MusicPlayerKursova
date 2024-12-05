@@ -15,5 +15,6 @@ namespace Kursova.Models
         {
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MusicApplicationDB;Integrated Security=True;");
         }
-        }
+
     }
+}

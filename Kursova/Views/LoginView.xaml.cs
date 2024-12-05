@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Kursova.Models;
 using Kursova.ViewModels;
 
 namespace Kursova.Views
@@ -9,24 +10,35 @@ namespace Kursova.Views
         public LoginView()
         {
             InitializeComponent();
+          
+    var dbContext = new ApplicationDbContext();
+
+            // Передаємо dbContext в конструктор LoginViewModel
+            this.DataContext = new LoginViewModel(dbContext);
+
         }
 
-        // Обробник для кнопки "Увійти"
         private void OnLoginButtonClick(object sender, RoutedEventArgs e)
         {
-            // Отримуємо логін і пароль з текстових полів
             var login = ((TextBox)FindName("LoginTextBox")).Text;
             var password = ((PasswordBox)FindName("PasswordBox")).Password;
 
-            // Перевірка аутентифікації
-            var viewModel = (LoginViewModel)this.DataContext;
-            if (viewModel.Login(login, password))
+            // Перевірка наявності DataContext та правильності типу
+            if (this.DataContext is LoginViewModel viewModel)
             {
-                MessageBox.Show("Вхід успішний!");
+                // Перевірка аутентифікації
+                if (viewModel.Login(login, password))
+                {
+                    MessageBox.Show("Вхід успішний!");
+                }
+                else
+                {
+                    MessageBox.Show("Невірний логін або пароль.");
+                }
             }
             else
             {
-                MessageBox.Show("Невірний логін або пароль.");
+                MessageBox.Show("Модель даних не знайдена або неправильний тип.");
             }
         }
     }
