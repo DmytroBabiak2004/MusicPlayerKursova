@@ -5,7 +5,9 @@
     <Grid>
         <TextBlock Text="Сторінка логіну" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"/>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <TextBox Name="LoginTextBox" Text="Логін" Margin="5"/>
+            <Label>Логін</Label>
+            <TextBox Name="LoginTextBox" Margin="5"/>
+            <Label>Пароль</Label>
             <PasswordBox Name="PasswordBox" Margin="5"/>
             <Button Content="Увійти" Margin="5" Click="OnLoginButtonClick"/>
         </StackPanel>

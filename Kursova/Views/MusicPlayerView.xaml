@@ -1,7 +1,28 @@
 ﻿<UserControl x:Class="Kursova.MusicPlayerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Kursova.ViewModels"
+             Height="400" Width="600">
+    <UserControl.DataContext>
+        <local:MusicPlayerViewModel />
+    </UserControl.DataContext>
+
     <Grid>
-        <TextBlock Text="Music Player" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" />
+        <!-- Верхній рядок з ComboBox та кнопками -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+            <ComboBox Name="PlaylistComboBox" 
+                      ItemsSource="{Binding Playlists}"
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}" 
+                      Width="200" Margin="0,0,10,0" />
+            <Button Content="Add Track" Command="{Binding AddTrackCommand}" Width="100" Margin="5,0,0,0" />
+            <Button Content="Remove Track" Command="{Binding RemoveTrackCommand}" Width="100" Margin="5,0,0,0" />
+        </StackPanel>
+
+        <!-- Список треків -->
+        <ListBox Name="TrackListBox" 
+                 ItemsSource="{Binding SelectedPlaylist.Tracks}" 
+                 DisplayMemberPath="Title" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,10,10" Height="300" />
     </Grid>
 </UserControl>

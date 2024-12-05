@@ -1,0 +1,14 @@
+﻿<Window x:Class="Kursova.Views.TrackSelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Select Track" Height="400" Width="600">
+    <Grid>
+        <ListBox Name="AllTracksListBox" 
+                 ItemsSource="{Binding AvailableTracks}" 
+                 DisplayMemberPath="Title" 
+                 SelectedItem="{Binding SelectedTrack}" 
+                 Margin="10" />
+        <Button Content="Select" Command="{Binding ConfirmTrackSelectionCommand}" 
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Width="100"/>
+    </Grid>
+</Window>

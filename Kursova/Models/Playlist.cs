@@ -1,10 +1,12 @@
-﻿namespace Kursova.Models
+﻿using System.Collections.ObjectModel;
+
+namespace Kursova.Models
 {
     public class Playlist
     {
-        public int PlaylistId { get; set; }  // Ідентифікатор плейлиста
-        public string Name { get; set; }  // Назва плейлиста
-        public int UserId { get; set; }  // Ідентифікатор користувача, який створив плейлист
-        public List<Track> Tracks { get; set; }  // Список пісень у плейлисті
+        public int PlaylistId { get; set; }
+        public string Name { get; set; }
+        public ObservableCollection<Track> Tracks { get; set; } = new ObservableCollection<Track>();
     }
+
 }
