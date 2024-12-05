@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Kursova.Views;
 
 namespace Kursova
 {
@@ -10,5 +11,6 @@ namespace Kursova
         {
             InitializeComponent();
         }
+
     }
 }

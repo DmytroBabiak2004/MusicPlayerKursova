@@ -97,7 +97,7 @@ namespace Kursova.ViewModels
         private void LoadPlaylists()
         {
             Playlists = new ObservableCollection<Playlist>
-    {
+            {
 
                 new Playlist
 {
@@ -117,27 +117,61 @@ namespace Kursova.ViewModels
         new Track { TrackId = 10, Title = "Nekhaj bude tak, yak ye" }
     }
 },
-new Playlist
-{
-    PlaylistId = 2,
-    Name = "Favorites",
-    Tracks = new ObservableCollection<Track>
-    {
-        new Track { TrackId = 11, Title = "Zory na nebi, a ya na zemli" },
-        new Track { TrackId = 12, Title = "Proshchavay, moya ridna, proshchavay" },
-        new Track { TrackId = 13, Title = "Ya tebe kokhayu, ale ne mozhu skazaty" },
-        new Track { TrackId = 14, Title = "Letila z hory veselа pіsня" },
-        new Track { TrackId = 15, Title = "Ne pokydaj mene, ya ne mozhu sam" },
-        new Track { TrackId = 16, Title = "Sontse zahodyt', a ya vse shche chekayu" },
-        new Track { TrackId = 17, Title = "Ya budu z toboyu, yak nastane nich" },
-        new Track { TrackId = 18, Title = "Moya ridna zemlya, moyi korinnya" },
-        new Track { TrackId = 19, Title = "Prosto zalyshaysya, my shche vse vypravymo" },
-        new Track { TrackId = 20, Title = "Shchastya tvoye v moyikh rukakh" }
-    }
-}
-
-
-    };
+                new Playlist
+                {
+                    PlaylistId = 2,
+                    Name = "Favorites",
+                    Tracks = new ObservableCollection<Track>
+                    {
+                        new Track { TrackId = 11, Title = "Zory na nebi, a ya na zemli" },
+                        new Track { TrackId = 12, Title = "Proshchavay, moya ridna, proshchavay" },
+                        new Track { TrackId = 13, Title = "Ya tebe kokhayu, ale ne mozhu skazaty" },
+                        new Track { TrackId = 14, Title = "Letila z hory veselа pіsня" },
+                        new Track { TrackId = 15, Title = "Ne pokydaj mene, ya ne mozhu sam" },
+                        new Track { TrackId = 16, Title = "Sontse zahodyt', a ya vse shche chekayu" },
+                        new Track { TrackId = 17, Title = "Ya budu z toboyu, yak nastane nich" },
+                        new Track { TrackId = 18, Title = "Moya ridna zemlya, moyi korinnya" },
+                        new Track { TrackId = 19, Title = "Prosto zalyshaysya, my shche vse vypravymo" },
+                        new Track { TrackId = 20, Title = "Shchastya tvoye v moyikh rukakh" }
+                    }
+                },
+                new Playlist
+                {
+                    PlaylistId = 3,
+                    Name = "Chill Vibes",
+                    Tracks = new ObservableCollection<Track>
+                    {
+                        new Track { TrackId = 21, Title = "Nebesna Lyubov'" },
+                        new Track { TrackId = 22, Title = "Prosti, shcho ne poluchylosya" },
+                        new Track { TrackId = 23, Title = "Kozhnyy den' ya schaslyvyj" },
+                        new Track { TrackId = 24, Title = "Vse budye zhyvym, vse budye ok" },
+                        new Track { TrackId = 25, Title = "Moya poshchastya, ty – moe sonce" },
+                        new Track { TrackId = 26, Title = "Mene ne spynyt' burya" },
+                        new Track { TrackId = 27, Title = "Vona z'yezdy, a ja na mesyatsi" },
+                        new Track { TrackId = 28, Title = "Dumo, lyubov, dumay pro nas" },
+                        new Track { TrackId = 29, Title = "Ty samyy zhyvyy v seshchi" },
+                        new Track { TrackId = 30, Title = "Vidpusty, malishka, dovede mnie lyubov'" }
+                    }
+                },
+                new Playlist
+                {
+                    PlaylistId = 4,
+                    Name = "Dance Party",
+                    Tracks = new ObservableCollection<Track>
+                    {
+                        new Track { TrackId = 31, Title = "Tantsyuy, poky moya ruka" },
+                        new Track { TrackId = 32, Title = "My ne vyzhyvemo odyn bez odnoho" },
+                        new Track { TrackId = 33, Title = "Kokhannya na vse, ta ne vse tak prosto" },
+                        new Track { TrackId = 34, Title = "Vy idiot, I ne budesh' myt!" },
+                        new Track { TrackId = 35, Title = "Shcho budemo robity na spiv" },
+                        new Track { TrackId = 36, Title = "Dziakuyu za taky tantsy" },
+                        new Track { TrackId = 37, Title = "Molodye  vyhodyt' na rozumno yak" },
+                        new Track { TrackId = 38, Title = "Korysy ke za dushoyu" },
+                        new Track { TrackId = 39, Title = "Druze na svitlo" },
+                        new Track { TrackId = 40, Title = "Ulyubky i smikh – tantsy z pobudovy" }
+                    }
+                }
+            };
 
             Console.WriteLine($"Loaded {Playlists.Count} playlists."); // Перевірка.
         }

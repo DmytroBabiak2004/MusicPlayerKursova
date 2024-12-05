@@ -27,6 +27,8 @@
 
             <!-- Головна область вмісту -->
             <ContentControl Content="{Binding CurrentView}" Margin="10" />
+            
+            
         </DockPanel>
     </Grid>
 </Window>
