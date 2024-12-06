@@ -74,12 +74,12 @@ public class MusicPlayerViewModel : INotifyPropertyChanged
                 Name = "Скрябін",
                 Tracks = new ObservableCollection<Track>
                 {
-                    new Track { TrackId = 1, Title = "Спи собі сама", FilePath = @"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Baraban.mp3" },
-                    new Track { TrackId = 2, Title = "Сам собі країна", FilePath = @"C:\Music\Guitar.mp3" },
-                    new Track { TrackId = 3, Title = "Іспанія", FilePath = @"C:\Music\Guitar.mp3" },
-                    new Track { TrackId = 4, Title = "Мам", FilePath = @"C:\Music\Guitar.mp3" },
-                    new Track { TrackId = 5, Title = "Шампанські очі", FilePath = @"C:\Music\Guitar.mp3" },
-                    new Track { TrackId = 6, Title = "Танець пінгвіна", FilePath = @"C:\Music\Guitar.mp3" }
+                    new Track { TrackId = 1, Title = "Спи собі сама", FilePath = @"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Spy-sobi-sama.mp3" },
+                    new Track { TrackId = 2, Title = "Сам собі країна", FilePath = @"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Sam-sobi-kraina.mp3" },
+                    new Track { TrackId = 3, Title = "Іспанія", FilePath = @"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Ispaniya.mp3"},
+                    new Track { TrackId = 4, Title = "Мам", FilePath =@"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Mam.mp3" },
+                    new Track { TrackId = 5, Title = "Шампанські очі", FilePath = @"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Schampanski-ochi.mp3" },
+                    new Track { TrackId = 6, Title = "Танець пінгвіна", FilePath = @"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Tanets-pingvina.mp3"}
                 }
             },
             new Playlist
