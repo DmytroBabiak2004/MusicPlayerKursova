@@ -1,209 +1,143 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using Kursova.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Linq;
-using Kursova.Models;
 
-
-namespace Kursova.ViewModels
+public class MusicPlayerViewModel : INotifyPropertyChanged
 {
-    public class MusicPlayerViewModel : INotifyPropertyChanged
+    private ObservableCollection<Playlist> _playlists;
+    private Playlist _selectedPlaylist;
+    private Track _selectedTrack;
+    private MusicPlayer _musicPlayer;
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
     {
-        private ObservableCollection<Playlist> _playlists;
-        private ObservableCollection<Track> _availableTracks;
-        private Playlist _selectedPlaylist;
-        private Track _selectedTrack;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public ObservableCollection<Playlist> Playlists
-        {
-            get => _playlists;
-            set
-            {
-                if (_playlists != value)
-                {
-                    _playlists = value;
-                    OnPropertyChanged(nameof(Playlists));
-                }
-            }
-        }
-
-
-        public ObservableCollection<Track> AvailableTracks
-        {
-            get => _availableTracks;
-            set
-            {
-                if (_availableTracks != value)
-                {
-                    _availableTracks = value;
-                    OnPropertyChanged(nameof(AvailableTracks));
-                }
-            }
-        }
-
-        public Playlist SelectedPlaylist
-        {
-            get => _selectedPlaylist;
-            set
-            {
-                if (_selectedPlaylist != value)
-                {
-                    _selectedPlaylist = value;
-                    OnPropertyChanged(nameof(SelectedPlaylist));
-                }
-            }
-        }
-
-        public Track SelectedTrack
-        {
-            get => _selectedTrack;
-            set
-            {
-                if (_selectedTrack != value)
-                {
-                    _selectedTrack = value;
-                    OnPropertyChanged(nameof(SelectedTrack));
-                }
-            }
-        }
-
-        public ICommand AddTrackCommand { get; }
-        public ICommand RemoveTrackCommand { get; }
-
-        public MusicPlayerViewModel()
-        {
-            LoadPlaylists();
-            LoadAvailableTracks();
-
-            AddTrackCommand = new RelayCommand<object>(AddTrackToPlaylist, CanAddTrackToPlaylist);
-            RemoveTrackCommand = new RelayCommand<object>(RemoveTrackFromPlaylist, CanRemoveTrackFromPlaylist);
-        }
-
-        private void AddTrackToPlaylist(object parameter)
-        {
-            if (SelectedPlaylist != null && SelectedTrack != null)
-            {
-                SelectedPlaylist.Tracks.Add(SelectedTrack);
-            }
-        }
-
-        private void LoadPlaylists()
-        {
-            Playlists = new ObservableCollection<Playlist>
-            {
-
-                new Playlist
-{
-    PlaylistId = 1,
-    Name = "My Playlist",
-    Tracks = new ObservableCollection<Track>
-    {
-        new Track { TrackId = 1, Title = "Ne tvoya viyna" },
-        new Track { TrackId = 2, Title = "Kokhannia ne zupynyt' nikhto" },
-        new Track { TrackId = 3, Title = "Moya Ukraina, moyi syny" },
-        new Track { TrackId = 4, Title = "Ty mene lyuby, a ya tebe chekayu" },
-        new Track { TrackId = 5, Title = "Shumyty zelene more" },
-        new Track { TrackId = 6, Title = "De ty teper, moya lyubov'?" },
-        new Track { TrackId = 7, Title = "Doroha, shcho vedyty do domu" },
-        new Track { TrackId = 8, Title = "Bez tebe ya ne mozhu buty" },
-        new Track { TrackId = 9, Title = "Tantsyuy, poky molodyy" },
-        new Track { TrackId = 10, Title = "Nekhaj bude tak, yak ye" }
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-},
-                new Playlist
+
+    public ObservableCollection<Playlist> Playlists
+    {
+        get => _playlists;
+        set
+        {
+            _playlists = value;
+            OnPropertyChanged(nameof(Playlists));
+        }
+    }
+
+    public Playlist SelectedPlaylist
+    {
+        get => _selectedPlaylist;
+        set
+        {
+            _selectedPlaylist = value;
+            OnPropertyChanged(nameof(SelectedPlaylist));
+        }
+    }
+
+    public Track SelectedTrack
+    {
+        get => _selectedTrack;
+        set
+        {
+            _selectedTrack = value;
+            OnPropertyChanged(nameof(SelectedTrack));
+            UpdateCommands();
+        }
+    }
+
+    public ICommand PlayTrackCommand { get; }
+    public ICommand PauseTrackCommand { get; }
+    public ICommand StopTrackCommand { get; }
+
+    public MusicPlayerViewModel()
+    {
+        _musicPlayer = MusicPlayer.Instance;
+
+        LoadPlaylists();
+
+        PlayTrackCommand = new RelayCommand(PlayTrack, CanPlayTrack);
+        PauseTrackCommand = new RelayCommand(PauseTrack, CanPauseOrStopTrack);
+        StopTrackCommand = new RelayCommand(StopTrack, CanPauseOrStopTrack);
+    }
+
+    private void LoadPlaylists()
+    {
+        Playlists = new ObservableCollection<Playlist>
+        {
+            new Playlist
+            {
+                PlaylistId = 1,
+                Name = "Скрябін",
+                Tracks = new ObservableCollection<Track>
                 {
-                    PlaylistId = 2,
-                    Name = "Favorites",
-                    Tracks = new ObservableCollection<Track>
-                    {
-                        new Track { TrackId = 11, Title = "Zory na nebi, a ya na zemli" },
-                        new Track { TrackId = 12, Title = "Proshchavay, moya ridna, proshchavay" },
-                        new Track { TrackId = 13, Title = "Ya tebe kokhayu, ale ne mozhu skazaty" },
-                        new Track { TrackId = 14, Title = "Letila z hory veselа pіsня" },
-                        new Track { TrackId = 15, Title = "Ne pokydaj mene, ya ne mozhu sam" },
-                        new Track { TrackId = 16, Title = "Sontse zahodyt', a ya vse shche chekayu" },
-                        new Track { TrackId = 17, Title = "Ya budu z toboyu, yak nastane nich" },
-                        new Track { TrackId = 18, Title = "Moya ridna zemlya, moyi korinnya" },
-                        new Track { TrackId = 19, Title = "Prosto zalyshaysya, my shche vse vypravymo" },
-                        new Track { TrackId = 20, Title = "Shchastya tvoye v moyikh rukakh" }
-                    }
-                },
-                new Playlist
-                {
-                    PlaylistId = 3,
-                    Name = "Chill Vibes",
-                    Tracks = new ObservableCollection<Track>
-                    {
-                        new Track { TrackId = 21, Title = "Nebesna Lyubov'" },
-                        new Track { TrackId = 22, Title = "Prosti, shcho ne poluchylosya" },
-                        new Track { TrackId = 23, Title = "Kozhnyy den' ya schaslyvyj" },
-                        new Track { TrackId = 24, Title = "Vse budye zhyvym, vse budye ok" },
-                        new Track { TrackId = 25, Title = "Moya poshchastya, ty – moe sonce" },
-                        new Track { TrackId = 26, Title = "Mene ne spynyt' burya" },
-                        new Track { TrackId = 27, Title = "Vona z'yezdy, a ja na mesyatsi" },
-                        new Track { TrackId = 28, Title = "Dumo, lyubov, dumay pro nas" },
-                        new Track { TrackId = 29, Title = "Ty samyy zhyvyy v seshchi" },
-                        new Track { TrackId = 30, Title = "Vidpusty, malishka, dovede mnie lyubov'" }
-                    }
-                },
-                new Playlist
-                {
-                    PlaylistId = 4,
-                    Name = "Dance Party",
-                    Tracks = new ObservableCollection<Track>
-                    {
-                        new Track { TrackId = 31, Title = "Tantsyuy, poky moya ruka" },
-                        new Track { TrackId = 32, Title = "My ne vyzhyvemo odyn bez odnoho" },
-                        new Track { TrackId = 33, Title = "Kokhannya na vse, ta ne vse tak prosto" },
-                        new Track { TrackId = 34, Title = "Vy idiot, I ne budesh' myt!" },
-                        new Track { TrackId = 35, Title = "Shcho budemo robity na spiv" },
-                        new Track { TrackId = 36, Title = "Dziakuyu za taky tantsy" },
-                        new Track { TrackId = 37, Title = "Molodye  vyhodyt' na rozumno yak" },
-                        new Track { TrackId = 38, Title = "Korysy ke za dushoyu" },
-                        new Track { TrackId = 39, Title = "Druze na svitlo" },
-                        new Track { TrackId = 40, Title = "Ulyubky i smikh – tantsy z pobudovy" }
-                    }
+                    new Track { TrackId = 1, Title = "Спи собі сама", FilePath = @"C:\Users\dimab\OneDrive\Desktop\Kursova\Kursova\Kursova\Music\Baraban.mp3" },
+                    new Track { TrackId = 2, Title = "Сам собі країна", FilePath = @"C:\Music\Guitar.mp3" },
+                    new Track { TrackId = 3, Title = "Іспанія", FilePath = @"C:\Music\Guitar.mp3" },
+                    new Track { TrackId = 4, Title = "Мам", FilePath = @"C:\Music\Guitar.mp3" },
+                    new Track { TrackId = 5, Title = "Шампанські очі", FilePath = @"C:\Music\Guitar.mp3" },
+                    new Track { TrackId = 6, Title = "Танець пінгвіна", FilePath = @"C:\Music\Guitar.mp3" }
                 }
-            };
-
-            Console.WriteLine($"Loaded {Playlists.Count} playlists."); // Перевірка.
-        }
-
-
-
-        private void LoadAvailableTracks()
-        {
-            AvailableTracks = new ObservableCollection<Track>
+            },
+            new Playlist
             {
-                new Track { TrackId = 1, Title = "Track 1" },
-                new Track { TrackId = 2, Title = "Track 2" },
-                new Track { TrackId = 3, Title = "Track 3" }
-            };
-        }
-
-        private bool CanAddTrackToPlaylist(object parameter)
-        {
-            return SelectedPlaylist != null && SelectedTrack != null && !SelectedPlaylist.Tracks.Contains(SelectedTrack);
-        }
-
-        private void RemoveTrackFromPlaylist(object parameter)
-        {
-            if (SelectedPlaylist != null && SelectedTrack != null && SelectedPlaylist.Tracks.Contains(SelectedTrack))
+                PlaylistId = 2,
+                Name = "Pop Classics",
+                Tracks = new ObservableCollection<Track>
+                {
+                    new Track { TrackId = 7, Title = "Синтезатор", FilePath = @"C:\Music\Synth.mp3" }
+                }
+            },
+              new Playlist
             {
-                SelectedPlaylist.Tracks.Remove(SelectedTrack);
+                PlaylistId = 3,
+                Name = "Улюблені",
+                Tracks = new ObservableCollection<Track>
+                {
+                    new Track { TrackId = 8, Title = "Синтезатор", FilePath = @"C:\Music\Synth.mp3" }
+                }
             }
-        }
+        };
+    }
 
-        private bool CanRemoveTrackFromPlaylist(object parameter)
+    private void PlayTrack()
+    {
+        if (SelectedTrack != null)
         {
-            return SelectedPlaylist != null && SelectedTrack != null && SelectedPlaylist.Tracks.Contains(SelectedTrack);
+            _musicPlayer.Play(SelectedTrack.FilePath);
+            UpdateCommands();
         }
+    }
+
+    private void PauseTrack()
+    {
+        _musicPlayer.Pause();
+        UpdateCommands();
+    }
+
+    private void StopTrack()
+    {
+        _musicPlayer.Stop();
+        UpdateCommands();
+    }
+
+    private bool CanPlayTrack()
+    {
+        return SelectedTrack != null && !_musicPlayer.IsPlaying;
+    }
+
+    private bool CanPauseOrStopTrack()
+    {
+        return _musicPlayer.IsPlaying;
+    }
+
+    private void UpdateCommands()
+    {
+        ((RelayCommand)PlayTrackCommand).NotifyCanExecuteChanged();
+        ((RelayCommand)PauseTrackCommand).NotifyCanExecuteChanged();
+        ((RelayCommand)StopTrackCommand).NotifyCanExecuteChanged();
     }
 }

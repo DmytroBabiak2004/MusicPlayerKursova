@@ -8,6 +8,7 @@ namespace Kursova
         public MusicPlayerView()
         {
             InitializeComponent();
+            DataContext = new MusicPlayerViewModel();
         }
     }
 }

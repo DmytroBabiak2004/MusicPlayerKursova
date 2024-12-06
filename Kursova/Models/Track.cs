@@ -7,6 +7,8 @@
         public string Artist { get; set; } 
         public string Album { get; set; }          
         public string Genre { get; set; }  
-        public TimeSpan Duration { get; set; } 
+        public TimeSpan Duration { get; set; }
+        public string FilePath { get; set; } 
+
     }
 }
