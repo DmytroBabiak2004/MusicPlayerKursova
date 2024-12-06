@@ -20,7 +20,6 @@ public class MusicPlayer
     {
         if (string.IsNullOrWhiteSpace(filePath)) return;
 
-        // Зупиняємо попередній трек, якщо грає
         if (IsPlaying && _currentFilePath != filePath)
         {
             Stop();

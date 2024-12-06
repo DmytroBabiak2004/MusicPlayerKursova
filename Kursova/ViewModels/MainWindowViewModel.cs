@@ -21,14 +21,14 @@ namespace Kursova.ViewModels
 
         public ICommand NavigateCommand { get; }
 
-        public MainWindowViewModel()  // Дефолтний конструктор
+        public MainWindowViewModel() 
         {
-            _viewFactory = new ViewFactory(); // Ініціалізація вручну
+            _viewFactory = new ViewFactory(); 
             NavigateCommand = new RelayCommand<string>(Navigate);
             CurrentView = _viewFactory.CreateView("Home");
         }
 
-        public MainWindowViewModel(IViewFactory viewFactory)  // Конструктор з параметром
+        public MainWindowViewModel(IViewFactory viewFactory)  
         {
             _viewFactory = viewFactory;
             NavigateCommand = new RelayCommand<string>(Navigate);

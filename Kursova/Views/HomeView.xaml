@@ -2,8 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid Background="#F0F8FF">
-        <!-- Заголовок на головній сторінці -->
-        <TextBlock Text="Welcome to Home!" 
+
+        <TextBlock Text="Музичний додаток" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Top" 
                    FontSize="36" 
@@ -11,15 +11,13 @@
                    Foreground="#333" 
                    Margin="0,30,0,0" />
 
-        <!-- Опис на головній сторінці -->
-        <TextBlock Text="Explore our features and enjoy your experience!" 
+        <TextBlock Text="Моделювання та аналіз програмного забезпечення" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Top" 
                    FontSize="18" 
                    Foreground="#666" 
                    Margin="0,100,0,0"/>
 
-        <!-- Кнопка переходу до іншої сторінки -->
         <Button Content="Get Started" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
@@ -35,9 +33,7 @@
                 Command="{Binding NavigateCommand}" 
                 CommandParameter="Login" />
            
-
-        <!-- Футер -->
-        <TextBlock Text="© 2024 Kursova App. All rights reserved." 
+        <TextBlock Text="© 2024 Kursova App. Литвин Даніл" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Bottom" 
                    FontSize="14" 

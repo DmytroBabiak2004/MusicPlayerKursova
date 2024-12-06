@@ -24,7 +24,6 @@ namespace Kursova.ViewModels
             _dbContext = dbContext;
             _track = track;
 
-            // Прив'язка значень до UI
             Title = _track.Title;
             Artist = _track.Artist;
             Album = _track.Album;
@@ -36,14 +35,12 @@ namespace Kursova.ViewModels
 
         private void SaveTrack(object parameter)
         {
-            // Перевірка на заповнення всіх полів
             if (string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Artist) || string.IsNullOrEmpty(Album) || string.IsNullOrEmpty(Genre) || string.IsNullOrEmpty(Duration))
             {
                 MessageBox.Show("Всі поля мають бути заповнені.");
                 return;
             }
 
-            // Перетворення тривалості у TimeSpan
             if (!TimeSpan.TryParse(Duration, out var duration))
             {
                 MessageBox.Show("Невірний формат тривалості.");
@@ -56,7 +53,6 @@ namespace Kursova.ViewModels
             _track.Genre = Genre;
             _track.Duration = duration;
 
-            // Збереження змін в базі даних
             if (_track.TrackId == 0)
             {
                 _dbContext.Tracks.Add(_track);

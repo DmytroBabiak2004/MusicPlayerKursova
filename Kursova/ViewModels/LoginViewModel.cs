@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Kursova.Models;  // Тут має бути ваш контекст БД
+using Kursova.Models;  
 
 namespace Kursova.ViewModels
 {

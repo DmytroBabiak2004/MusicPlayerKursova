@@ -6,14 +6,12 @@
     
     <Grid>
         <DockPanel>
-            <!-- Верхнє меню -->
             <Menu DockPanel.Dock="Top" Background="LightGray">
                 <MenuItem Header="Файл">
                     <MenuItem Header="Вихід" Command="{Binding ExitCommand}" />
                 </MenuItem>
             </Menu>
 
-            <!-- Ліва панель навігації -->
             <StackPanel DockPanel.Dock="Left" Width="200" Background="LightSteelBlue">
                 <TextBlock Text="Навігація" FontWeight="Bold" FontSize="16" Margin="10"/>
                 <Button Content="Головна" Command="{Binding NavigateCommand}" CommandParameter="Home" Margin="10" />
@@ -23,9 +21,7 @@
                 <Button Content="Профіль користувача" Command="{Binding NavigateCommand}" CommandParameter="UserProfile" Margin="10" />
             </StackPanel>
 
-            <!-- Головна область вмісту -->
             <ContentControl Content="{Binding CurrentView}" Margin="10" />
-            
             
         </DockPanel>
     </Grid>

@@ -21,7 +21,6 @@ namespace Kursova.ViewModels
 
         private void ConfirmSelection(object parameter)
         {
-            // Закриває вікно після вибору
             if (parameter is Window window)
             {
                 window.DialogResult = true;

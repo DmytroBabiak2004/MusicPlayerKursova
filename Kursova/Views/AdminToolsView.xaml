@@ -5,13 +5,11 @@
     <Grid>
         <TextBlock Text="Admin Tools" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Margin="0,20,0,0" />
 
-        <!-- List of Tracks -->
         <DataGrid Name="TracksDataGrid" 
                   ItemsSource="{Binding Tracks}" 
                   AutoGenerateColumns="True" 
                   Margin="10,60,10,50"/>
 
-        <!-- Buttons for Add, Edit, and Delete -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
             <Button Content="Add" Command="{Binding AddTrackCommand}" Margin="10"/>
             <Button Content="Edit" Command="{Binding EditTrackCommand}" Margin="10"/>

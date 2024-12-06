@@ -4,7 +4,6 @@
              Height="400" Width="600">
 
     <Grid>
-        <!-- Верхній рядок: вибір плейлиста -->
         <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Top">
             <ComboBox ItemsSource="{Binding Playlists}"
                       DisplayMemberPath="Name"
@@ -15,7 +14,6 @@
             <Button Content="Stop" Command="{Binding StopTrackCommand}" Width="100" Margin="5,0,0,0" />
         </StackPanel>
 
-        <!-- Список треків -->
         <ListBox ItemsSource="{Binding SelectedPlaylist.Tracks}"
                  DisplayMemberPath="Title"
                  SelectedItem="{Binding SelectedTrack}"

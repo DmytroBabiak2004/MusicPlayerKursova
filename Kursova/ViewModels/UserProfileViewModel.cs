@@ -23,7 +23,6 @@ namespace Kursova.ViewModels
 
         public UserProfileViewModel()
         {
-            // Ініціалізуйте профіль користувача
             CurrentUser = new User
             {
                 Username = "Ivan",

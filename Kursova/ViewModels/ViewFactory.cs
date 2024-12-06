@@ -1,5 +1,4 @@
-﻿// IViewFactory.cs
-using Kursova.Views;
+﻿using Kursova.Views;
 using Kursova;
 using System.Windows.Controls;
 using Kursova.Views;
@@ -8,8 +7,6 @@ public interface IViewFactory
 {
     UserControl CreateView(string viewName);
 }
-
-// ViewFactory.cs
 
 public class ViewFactory : IViewFactory
 {
